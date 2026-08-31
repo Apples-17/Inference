@@ -7,6 +7,10 @@ DEVICE = "cuda"
 class EagleDecoder:
     def __init__(self):
         # Load target model
+
+
+
+        
         self.tokenizer=AutoTokenizer.from_pretrained(
             TARGET_MODEL,
             trust_remote_code=True,
