@@ -1,0 +1,40 @@
+{
+  "candidate": "p10_manual_cudagraph",
+  "reference": "hf_static",
+  "expected_outputs": 80,
+  "candidate_outputs": 80,
+  "compared_outputs": 80,
+  "exact_outputs": 80,
+  "mismatched_outputs": 0,
+  "missing_outputs": [],
+  "extra_outputs": [],
+  "metadata": {
+    "benchmark_name": {
+      "reference": "mt_bench",
+      "candidate": "mt_bench",
+      "match": true
+    },
+    "model": {
+      "reference": "Qwen/Qwen3-4B",
+      "candidate": "Qwen/Qwen3-4B",
+      "match": true
+    },
+    "precision": {
+      "reference": "float16",
+      "candidate": "float16",
+      "match": true
+    },
+    "prompt_mode": {
+      "reference": "natural",
+      "candidate": "natural",
+      "match": true
+    },
+    "prompts_file_sha256": {
+      "reference": "f6384489d65b7ad03aba4396c6066e46e6bf74ac4e459a56fefbcb7cc3a6ad42",
+      "candidate": "f6384489d65b7ad03aba4396c6066e46e6bf74ac4e459a56fefbcb7cc3a6ad42",
+      "match": true
+    }
+  },
+  "first_divergences": [],
+  "lossless": true
+}

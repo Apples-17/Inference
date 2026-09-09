@@ -1,0 +1,18 @@
+{
+  "candidates": [
+    {
+      "variant": "p9_compile",
+      "status": "rejected",
+      "exact_outputs": 63,
+      "expected_outputs": 80,
+      "gate_result": "./results/final_mt_bench/full_gate/p9_compile_gate.json"
+    },
+    {
+      "variant": "p10_manual_cudagraph",
+      "status": "pass",
+      "exact_outputs": 80,
+      "expected_outputs": 80,
+      "gate_result": "./results/final_mt_bench/full_gate/p10_manual_cudagraph_gate.json"
+    }
+  ]
+}

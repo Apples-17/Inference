@@ -1,0 +1,388 @@
+{
+  "schema_version": 1,
+  "benchmark": {
+    "name": "mt_bench",
+    "model": "Qwen/Qwen3-4B",
+    "prompts": 80,
+    "output_tokens_per_prompt": 256,
+    "warmup": 3,
+    "repetitions": 5,
+    "batch_size": 1,
+    "precision": "float16",
+    "decoding": "greedy"
+  },
+  "selected_variant": "p10_manual_cudagraph",
+  "selection_rule": "lowest screening median among passes exact on the screen, followed by full 80-prompt exact validation",
+  "pass_sweep": [
+    {
+      "label": "P1 runner buffers",
+      "variant": "lossless_safe",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 3677.0286245000107,
+      "fastest_prompt_ms": 3037.3872950000023,
+      "slowest_prompt_ms": 3807.339766000013,
+      "tokens_per_second": 18.009048047460954,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/lossless_safe.json",
+      "screen_speedup_vs_vllm": 0.7769284344636412,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.736780578755782,
+        "p25": 0.7347874772201083,
+        "p75": 0.7908324672232891,
+        "mean": 0.7833652575412453,
+        "stddev": 0.08811600690456474,
+        "min": 0.7232648983425392,
+        "max": 0.9418574228941451
+      }
+    },
+    {
+      "label": "P2a packed QKV",
+      "variant": "p2_packed_qkv",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 7,
+      "lossless": false,
+      "median_prompt_ms": 2720.9687649999805,
+      "fastest_prompt_ms": 2597.2548109999707,
+      "slowest_prompt_ms": 3477.9548500000033,
+      "tokens_per_second": 22.47604974516436,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p2_packed_qkv.json",
+      "screen_speedup_vs_vllm": 0.9696393776848979,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.9956288273915608,
+        "p25": 0.960519905087865,
+        "p75": 1.0341868721729037,
+        "mean": 0.9791364755267096,
+        "stddev": 0.09849154273850591,
+        "min": 0.7883699919221363,
+        "max": 1.0859436261974036
+      }
+    },
+    {
+      "label": "P2b packed gate/up",
+      "variant": "p2_packed_gate_up",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 2927.5908245000155,
+      "fastest_prompt_ms": 2747.9633039999953,
+      "slowest_prompt_ms": 3805.199769000012,
+      "tokens_per_second": 20.508936181933027,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p2_packed_gate_up.json",
+      "screen_speedup_vs_vllm": 0.8847761213336559,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.923982801474422,
+        "p25": 0.8240664621450207,
+        "p75": 0.9840969586356737,
+        "mean": 0.897022633285147,
+        "stddev": 0.10565415177082974,
+        "min": 0.7468926145150259,
+        "max": 1.0154375529863953
+      }
+    },
+    {
+      "label": "P3 fused RMSNorm/residual",
+      "variant": "p3_fused_rmsnorm_residual",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 3422.491820999994,
+      "fastest_prompt_ms": 2816.7505339999934,
+      "slowest_prompt_ms": 3517.517991000034,
+      "tokens_per_second": 19.46533826353793,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p3_fused_rmsnorm_residual.json",
+      "screen_speedup_vs_vllm": 0.8397542581673499,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.8169349205378764,
+        "p25": 0.8043446721911371,
+        "p75": 0.8601764964704546,
+        "mean": 0.8445158275164774,
+        "stddev": 0.07366142209214506,
+        "min": 0.7795028323993102,
+        "max": 0.9609264434930822
+      }
+    },
+    {
+      "label": "P4 fused QK-Norm/RoPE",
+      "variant": "p4_fused_qk_rope",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 7,
+      "lossless": false,
+      "median_prompt_ms": 2844.6729500000174,
+      "fastest_prompt_ms": 2504.626772999984,
+      "slowest_prompt_ms": 2932.678993999957,
+      "tokens_per_second": 22.99037301609762,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p4_fused_qk_rope.json",
+      "screen_speedup_vs_vllm": 0.9918278005621824,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.9699468465080365,
+        "p25": 0.930234056828731,
+        "p75": 1.0415382301776022,
+        "mean": 0.9960356376153433,
+        "stddev": 0.08504847219040208,
+        "min": 0.9148297950194497,
+        "max": 1.1422004271612642
+      }
+    },
+    {
+      "label": "P5 fused KV write",
+      "variant": "p5_fused_kv_write",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 3879.6665099999927,
+      "fastest_prompt_ms": 3066.1354210000127,
+      "slowest_prompt_ms": 4034.7420840000723,
+      "tokens_per_second": 17.50589359901688,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p5_fused_kv_write.json",
+      "screen_speedup_vs_vllm": 0.755221845814821,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.7193370782905902,
+        "p25": 0.6909867935410483,
+        "p75": 0.8569557840943183,
+        "mean": 0.7649454847646125,
+        "stddev": 0.09770858093255047,
+        "min": 0.6687569078805082,
+        "max": 0.913833167127898
+      }
+    },
+    {
+      "label": "P6 native GQA attention",
+      "variant": "p6_fused_gqa_attention",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 2981.981778999966,
+      "fastest_prompt_ms": 2959.2394279999326,
+      "slowest_prompt_ms": 3158.7676469999906,
+      "tokens_per_second": 21.310946015832204,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p6_fused_gqa_attention.json",
+      "screen_speedup_vs_vllm": 0.9193756317038658,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.92400630751752,
+        "p25": 0.9060851975524107,
+        "p75": 0.9500353528589858,
+        "mean": 0.9199715863291179,
+        "stddev": 0.0389040492007726,
+        "min": 0.8429826301181227,
+        "max": 0.9617100884342438
+      }
+    },
+    {
+      "label": "P7 fused SwiGLU",
+      "variant": "p7_fused_swiglu",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 7,
+      "lossless": false,
+      "median_prompt_ms": 4015.5251484999894,
+      "fastest_prompt_ms": 3519.360053000014,
+      "slowest_prompt_ms": 4099.32060299991,
+      "tokens_per_second": 16.241862217483543,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p7_fused_swiglu.json",
+      "screen_speedup_vs_vllm": 0.7006902614812411,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.6803095749275163,
+        "p25": 0.6722656375601022,
+        "p75": 0.7210158844215033,
+        "mean": 0.7028679050444847,
+        "stddev": 0.052789055108526654,
+        "min": 0.6564966066012944,
+        "max": 0.8086499730466494
+      }
+    },
+    {
+      "label": "P8 fused LM-head argmax",
+      "variant": "p8_fused_lm_head_argmax",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 7,
+      "lossless": false,
+      "median_prompt_ms": 2841.920313000003,
+      "fastest_prompt_ms": 2807.436402999997,
+      "slowest_prompt_ms": 3094.71277800003,
+      "tokens_per_second": 22.12349314776284,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p8_fused_lm_head_argmax.json",
+      "screen_speedup_vs_vllm": 0.9544297317026602,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 0.9587967523040486,
+        "p25": 0.939741655730818,
+        "p75": 0.9655062248177496,
+        "mean": 0.9550443106363363,
+        "stddev": 0.03082527010823453,
+        "min": 0.9022387666633453,
+        "max": 1.0100824820692895
+      }
+    },
+    {
+      "label": "P9 torch.compile",
+      "variant": "p9_compile",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 2280.1425349999818,
+      "fastest_prompt_ms": 2273.955122000075,
+      "slowest_prompt_ms": 2299.0119020000748,
+      "tokens_per_second": 28.025333810528156,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p9_compile.json",
+      "screen_speedup_vs_vllm": 1.2090410700972283,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 1.2151651288250032,
+        "p25": 1.182165041723454,
+        "p75": 1.2297221531496165,
+        "mean": 1.2090372453115985,
+        "stddev": 0.03382866673196563,
+        "min": 1.1627195262953793,
+        "max": 1.2580660639792636
+      }
+    },
+    {
+      "label": "P10 manual CUDA graph",
+      "variant": "p10_manual_cudagraph",
+      "status": "ok",
+      "expected_outputs": 8,
+      "exact_outputs": 8,
+      "lossless": true,
+      "median_prompt_ms": 2617.6721165001027,
+      "fastest_prompt_ms": 2610.502853000071,
+      "slowest_prompt_ms": 2641.6913100001693,
+      "tokens_per_second": 24.401393016544066,
+      "raw_result": "./results/final_mt_bench/pass_sweep/raw/p10_manual_cudagraph.json",
+      "screen_speedup_vs_vllm": 1.0527006216604804,
+      "screen_paired_speedup": {
+        "count": 8,
+        "median": 1.0577315128841538,
+        "p25": 1.030490429261854,
+        "p75": 1.0693727018404808,
+        "mean": 1.0526902293259088,
+        "stddev": 0.029108443931145957,
+        "min": 1.0130677141656497,
+        "max": 1.0958753662009664
+      }
+    }
+  ],
+  "full_validation": [
+    {
+      "variant": "p9_compile",
+      "status": "rejected",
+      "exact_outputs": 63,
+      "expected_outputs": 80,
+      "gate_result": "./results/final_mt_bench/full_gate/p9_compile_gate.json"
+    },
+    {
+      "variant": "p10_manual_cudagraph",
+      "status": "pass",
+      "exact_outputs": 80,
+      "expected_outputs": 80,
+      "gate_result": "./results/final_mt_bench/full_gate/p10_manual_cudagraph_gate.json"
+    }
+  ],
+  "final": {
+    "lossless": {
+      "candidate": "p10_manual_cudagraph",
+      "reference": "hf_static",
+      "expected_outputs": 80,
+      "candidate_outputs": 80,
+      "compared_outputs": 80,
+      "exact_outputs": 80,
+      "mismatched_outputs": 0,
+      "missing_outputs": [],
+      "extra_outputs": [],
+      "metadata": {
+        "benchmark_name": {
+          "reference": "mt_bench",
+          "candidate": "mt_bench",
+          "match": true
+        },
+        "model": {
+          "reference": "Qwen/Qwen3-4B",
+          "candidate": "Qwen/Qwen3-4B",
+          "match": true
+        },
+        "precision": {
+          "reference": "float16",
+          "candidate": "float16",
+          "match": true
+        },
+        "prompt_mode": {
+          "reference": "natural",
+          "candidate": "natural",
+          "match": true
+        },
+        "prompts_file_sha256": {
+          "reference": "f6384489d65b7ad03aba4396c6066e46e6bf74ac4e459a56fefbcb7cc3a6ad42",
+          "candidate": "f6384489d65b7ad03aba4396c6066e46e6bf74ac4e459a56fefbcb7cc3a6ad42",
+          "match": true
+        }
+      },
+      "first_divergences": [],
+      "lossless": true
+    },
+    "optimized_model": {
+      "prompt_latency_ms": {
+        "count": 80,
+        "median": 10992.718437500116,
+        "p25": 10963.85822849993,
+        "p75": 11055.089633749958,
+        "mean": 11050.682729712464,
+        "stddev": 157.86084482238508,
+        "min": 10930.302859999756,
+        "max": 11651.915724998616
+      },
+      "summed_per_prompt_median_ms": 884054.6183769971,
+      "tokens_per_second": 23.165989492366965
+    },
+    "vllm": {
+      "prompt_latency_ms": {
+        "count": 80,
+        "median": 11891.591414500908,
+        "p25": 11460.287407749547,
+        "p75": 12653.218511999512,
+        "mean": 12286.742433999916,
+        "stddev": 1219.447174367224,
+        "min": 11027.298564000375,
+        "max": 16530.931304998376
+      },
+      "summed_per_prompt_median_ms": 982939.3947199932,
+      "tokens_per_second": 20.83546565537143
+    },
+    "speedup_vs_vllm": {
+      "definition": "speedup_vs_vllm = vLLM summed per-prompt median latency / optimized summed per-prompt median latency",
+      "aggregate": 1.1118536957869587,
+      "credited": 1.1118536957869587,
+      "paired": {
+        "count": 80,
+        "median": 1.0815085257933745,
+        "p25": 1.0440650434212855,
+        "p75": 1.1483538476695383,
+        "mean": 1.110633633158514,
+        "stddev": 0.093277449238664,
+        "min": 1.0088740179703146,
+        "max": 1.4187307645499074
+      }
+    }
+  },
+  "files": {
+    "optimized": "./results/final_mt_bench/final/p10_manual_cudagraph.json",
+    "vllm": "./results/final_mt_bench/final/vllm.json",
+    "comparison": "./results/final_mt_bench/final/comparison.json"
+  }
+}
