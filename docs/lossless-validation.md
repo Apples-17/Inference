@@ -19,7 +19,7 @@ established separately against the frozen unmodified Transformers output.
 
 ## Two-stage gate
 
-The selector uses two correctness checks:
+We uses two correctness checks:
 
 1. **Screening gate:** each pass generates 64 tokens for the same eight
    MT-Bench prompts. A single mismatch removes that pass from consideration.
